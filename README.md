@@ -26,3 +26,7 @@ First, we need a Cloud-Config file, mostly to bring in the SSH public key(s).
         ```
           - ssh-rsa AAA...
         ```
+1. Configure the host name by inserting this as the 2nd line of `cloud-config.yml`:
+    ```
+    hostname: cowboy
+    ```
