@@ -30,3 +30,26 @@ First, we need a Cloud-Config file, mostly to bring in the SSH public key(s).
     ```
     hostname: cowboy
     ```
+1. Boot RancherOS (I had previously configured a USB storage device with [UNetbootin](https://unetbootin.github.io/))
+1. Record what storage device is attached where; both of these commands will give you information about what storage devices are connected, how big they are and what partitions might already exist on them:
+    ```
+    sudo fdisk -l
+    sudo parted -l
+    ```
+    ...this will inform what the destination parameter (`-d`) will take as a value for the upcoming `ros install` command.
+1. Install!
+    ```
+    sudo ros install -c https://raw.githubusercontent.com/olivierdagenais/cowboy-server/main/cloud-config.yml -d /dev/sda
+    ```
+    If you are installing from USB-based storage and it fails right away with:
+    ```
+    ERRO[0000] Failed to get boot iso: stat /dev/sr0: no such file or directory
+    There is no boot iso drive, terminate the task
+    FATA[0000] Failed to run install
+    err="stat /dev/sr0: no such file or directory"
+    ```
+    ...then you might be hitting [#2241](https://github.com/rancher/os/issues/2241) (affects version 1.5.0), so try this workaround:
+    ```
+    sudo mkdir /dev/sr0
+    ```
+    ...and run the install command again.
