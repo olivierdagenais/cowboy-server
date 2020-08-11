@@ -76,3 +76,48 @@ First, we need a Cloud-Config file, mostly to bring in the SSH public key(s).
         sudo ros service up zfs
         ```
         ...wait another few minutes.
+1. Configure first ZFS pool, with inspiration from [ZFS Concepts and Tutorial](https://linuxhint.com/zfs-concepts-and-tutorial/):
+    1. Cheat-sheet of commands to query the state while performing the following operations:
+        ```
+        sudo zpool list
+        sudo zpool status
+        sudo zfs list
+        ```
+    1. Create "internal" pool of type `raidz1` (needs 3 disks):
+        ```
+        sudo zpool create -m /mnt/internal internal raidz1 /dev/sdb /dev/sdc /dev/sdd
+        ```
+    1. Stop Docker and delete its old/current folder:
+        ```
+        sudo system-docker stop docker
+        sudo rm -rf /var/lib/docker/*
+        ```
+    1. Create a file system for Docker:
+        ```
+        sudo zfs create internal/docker
+        sudo zfs list -o name,mountpoint,mounted
+        ```
+	1. Configure Docker for ZFS:
+        ```
+        sudo ros config set rancher.docker.storage_driver 'zfs'
+        ```
+    1. Configure Docker to use the new mount point:
+        ```
+        sudo ros config set rancher.docker.graph /mnt/internal/docker
+        ```
+	1. Start Docker:
+        ```
+        sudo system-docker start docker
+        ```
+    1. Confirm it's working:
+        ```
+        docker info
+        ```
+        ... you should see something like:
+        ```
+         Storage Driver: zfs
+          Zpool: internal
+          Zpool Health: ONLINE
+          Parent Dataset: internal/docker
+          Space Used By Parent: 53196
+        ```
