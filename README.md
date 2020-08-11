@@ -60,3 +60,19 @@ First, we need a Cloud-Config file, mostly to bring in the SSH public key(s).
     ssh cowboy@rancher
     ```
     ...unfortunately, as much as I tried to get `agetty` to include the public key fingerprints in the TTYs, I was not able to and thus you'll have to trust that your first connection is safe and accept the key fingerprint that's presented.
+1. Install the ZFS service as per [Using ZFS](https://rancher.com/docs/os/v1.x/en/installation/storage/using-zfs/):
+    1. Download a container to compile ZFS for Linux:
+        ```
+        sudo ros service enable zfs
+        ```
+        ...this will print something like:
+        ```
+        Pulling zfs (docker.io/rancher/os-zfs:v0.7.13-1)...
+        (...)
+        ```
+        ...and take a minute or three.
+    2. Install the kernel headers, download ZFS on Linux, build & install it:
+        ```
+        sudo ros service up zfs
+        ```
+        ...wait another few minutes.
