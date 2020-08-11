@@ -53,3 +53,10 @@ First, we need a Cloud-Config file, mostly to bring in the SSH public key(s).
     sudo mkdir /dev/sr0
     ```
     ...and run the install command again.
+
+    You'll be prompted to install and again to reboot.
+1. Connect via SSH using one of your workstations:
+    ```
+    ssh cowboy@rancher
+    ```
+    ...unfortunately, as much as I tried to get `agetty` to include the public key fingerprints in the TTYs, I was not able to and thus you'll have to trust that your first connection is safe and accept the key fingerprint that's presented.
