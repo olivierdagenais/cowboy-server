@@ -121,3 +121,13 @@ First, we need a Cloud-Config file, mostly to bring in the SSH public key(s).
           Parent Dataset: internal/docker
           Space Used By Parent: 53196
         ```
+1. Configure second ZFS pool:
+    1. Create "external" pool of type `mirror`:
+        ```
+        sudo zpool create -m /mnt/external external mirror /dev/sde /dev/sdf
+        ```
+    1. Confirm it's working:
+        ```
+        sudo touch /mnt/external/success
+        ls -l /mnt/external
+        ```
