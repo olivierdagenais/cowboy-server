@@ -6,8 +6,8 @@ Configuration files for a RancherOS deployment
 
 Links
 
-* https://rancher.com/docs/os/v1.x/en/installation/
-* https://rancher.com/docs/os/v1.x/en/installation/server/install-to-disk/
+* [Installing and Running RancherOS](https://rancher.com/docs/os/v1.x/en/installation/)
+* [Installing to Disk](https://rancher.com/docs/os/v1.x/en/installation/server/install-to-disk/)
 
 First, we need a Cloud-Config file, mostly to bring in the SSH public key(s).
 
