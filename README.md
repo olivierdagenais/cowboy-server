@@ -80,7 +80,7 @@ First, we need a Cloud-Config file, mostly to bring in the SSH public key(s).
 1. Connect via SSH using one of your workstations:
 
     ```sh
-    ssh cowboy
+    ssh rancher@cowboy
     ```
 
     ...unfortunately, as much as I tried to get `agetty` to include the public key fingerprints in the TTYs, I was not able to and thus you'll have to trust that your first connection is safe and accept the key fingerprint that's presented.
