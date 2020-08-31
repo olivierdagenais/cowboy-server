@@ -57,7 +57,7 @@ First, we need a Cloud-Config file, mostly to bring in the SSH public key(s).
     You'll be prompted to install and again to reboot.
 1. Connect via SSH using one of your workstations:
     ```
-    ssh cowboy@rancher
+    ssh cowboy
     ```
     ...unfortunately, as much as I tried to get `agetty` to include the public key fingerprints in the TTYs, I was not able to and thus you'll have to trust that your first connection is safe and accept the key fingerprint that's presented.
 1. Install the ZFS service as per [Using ZFS](https://rancher.com/docs/os/v1.x/en/installation/storage/using-zfs/):
