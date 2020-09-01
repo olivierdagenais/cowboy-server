@@ -4,12 +4,14 @@ Configuration files for a RancherOS deployment
 
 ## Installing RancherOS
 
-Links
+### Links
 
 * [Installing and Running RancherOS](https://rancher.com/docs/os/v1.x/en/installation/)
 * [Installing to Disk](https://rancher.com/docs/os/v1.x/en/installation/server/install-to-disk/)
 
-First, we need a Cloud-Config file, mostly to bring in the SSH public key(s).
+### Create the Cloud-Config file
+
+First, we need a Cloud-Config file, mostly to bring in the SSH public key(s) for password-less authentication.
 
 1. Create a `cloud-config.yml` file with these lines:
 
@@ -18,7 +20,7 @@ First, we need a Cloud-Config file, mostly to bring in the SSH public key(s).
     ssh_authorized_keys:
     ```
 
-1. For each workstation:
+1. For each workstation that you'll want to use to connect to the server via SSH:
     1. Create SSH key:
 
         ```sh
@@ -44,7 +46,13 @@ First, we need a Cloud-Config file, mostly to bring in the SSH public key(s).
     hostname: cowboy
     ```
 
-1. Boot RancherOS (I had previously configured a USB storage device with [UNetbootin](https://unetbootin.github.io/))
+Now we have a `cloud-config.yml` that looks suspiciously like the one in this repository.
+
+### Boot the RancherOS installer
+
+You can download the `rancheros.iso` file from [the RancherOS releases page](https://github.com/rancher/os/releases/).  I configured a USB storage device with it using [UNetbootin](https://unetbootin.github.io/).
+
+1. Boot from the USB storage device.
 1. Record what storage device is attached where; both of these commands will give you information about what storage devices are connected, how big they are and what partitions might already exist on them:
 
     ```sh
@@ -53,7 +61,7 @@ First, we need a Cloud-Config file, mostly to bring in the SSH public key(s).
     ```
 
     ...this will inform what the destination parameter (`-d`) will take as a value for the upcoming `ros install` command.
-1. Install!
+1. Install!  You'll notice that the URL that is provided to the `-c` parameter is that of the file from this repository, which needs to be retrievable anonymously.
 
     ```sh
     sudo ros install -c https://raw.githubusercontent.com/olivierdagenais/cowboy-server/main/cloud-config.yml -d /dev/sda
