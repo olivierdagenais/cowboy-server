@@ -256,3 +256,26 @@ Now that we have RancherOS running, let's deploy the web-based UI from our works
     ```
 
     ...notice the `:::8080`?
+
+### From a web browser
+
+1. Navigate to <http://cowboy:8080> and you should be running as `admin` as there is no access control on by default.
+1. You'll be asked if you want to enable anonymous collection of data. That's up to you.
+1. It turns out there are no hosts configured, either, which is likely being brought to your attention in a banner at the top.  Click [Add a host](http://cowboy:8080/env/1a5/infra/hosts/add)
+    1. Select **Custom**
+    2. The only field I had to fill in was the _public IP_ because I'm adding the RancherOS server as a host.  Keeping with the example, that would be `192.0.2.162`.
+    3. Click the **Copy to Clipboard** link near step 5.
+
+### Back to the SSH prompt
+
+1. Paste the command you copied in the previous step.  Mine looked like this:
+
+   ```sh
+   sudo docker run -e CATTLE_AGENT_IP="192.0.2.162"  --rm --privileged -v /var/run/docker.sock:/var/run/docker.sock -v /var/lib/rancher:/var/lib/rancher rancher/agent:v1.2.11 http://cowboy:8080/v1/scripts/VERY_LONG_KEY
+   ```
+
+2. Wait a few minutes
+
+### Back to the web browser
+
+If we now go to [**Infrastructure > Hosts**](http://cowboy:8080/env/1a5/infra/hosts), we should see a single host and instances of  "starting" will eventually change to displaying an IP address.
