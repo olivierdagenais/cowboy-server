@@ -48,6 +48,27 @@ First, we need a Cloud-Config file, mostly to bring in the SSH public key(s) for
 
 Now we have a `cloud-config.yml` that looks suspiciously like the one in this repository.
 
+### Configure a DHCP reservation
+
+This depends heavily on your home network, but most consumer routers allow you to reserve an IP address for a given network adapter, keying off of its MAC address.
+
+For the purposes of a running example, I will be using `192.0.2.162` (taken from [RFC 5737: IPv4 Address Blocks Reserved for Documentation
+](https://tools.ietf.org/html/rfc5737)) as the IP address I've reserved for the server.
+
+### Edit your `HOSTS` file
+
+You'll want to do this on every workstation you'll be using to access your Rancher server.
+
+On Windows, it's under `C:\Windows\System32\drivers\etc\hosts` and you'll need to use an editor running in elevated (administrator) mode.
+
+1. Append the following line:
+
+    ```config
+    192.0.2.162 cowboy
+    ```
+
+    ...you'll notice that's the IP address we reserved in the previous section.
+
 ### Boot the RancherOS installer
 
 You can download the `rancheros.iso` file from [the RancherOS releases page](https://github.com/rancher/os/releases/).  I configured a USB storage device with it using [UNetbootin](https://unetbootin.github.io/).
