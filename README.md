@@ -84,6 +84,9 @@ First, we need a Cloud-Config file, mostly to bring in the SSH public key(s).
     ```
 
     ...unfortunately, as much as I tried to get `agetty` to include the public key fingerprints in the TTYs, I was not able to and thus you'll have to trust that your first connection is safe and accept the key fingerprint that's presented.
+
+## Set up ZFS
+
 1. Install the ZFS service as per [Using ZFS](https://rancher.com/docs/os/v1.x/en/installation/storage/using-zfs/):
     1. Download a container to compile ZFS for Linux:
 
