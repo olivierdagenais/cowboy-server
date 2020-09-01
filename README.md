@@ -214,3 +214,45 @@ You can download the `rancheros.iso` file from [the RancherOS releases page](htt
         sudo touch /mnt/external/success
         ls -l /mnt/external
         ```
+
+## Set up Rancher Server
+
+Now that we have RancherOS running, let's deploy the web-based UI from our workstation.
+
+### Links
+
+* [Install Rancher Server on RancherOS
+](https://www.vultr.com/docs/install-rancher-server-on-rancheros)
+* [System Services](https://rancher.com/docs/os/v1.x/en/system-services/)
+
+### From an SSH prompt
+
+1. Install the `rancher-server` service
+
+    ```sh
+    sudo ros service enable rancher-server
+    ````
+
+2. Start the `rancher-server` service:
+
+    ```sh
+    sudo ros service up rancher-server
+    ```
+
+3. Confirm the service is listening:
+
+    ```sh
+    netstat -l -t -n
+    ```
+
+    ...this will print something like:
+
+    ```log
+    Active Internet connections (only servers)
+    Proto Recv-Q Send-Q Local Address           Foreign Address         State
+    tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN
+    tcp        0      0 :::22                   :::*                    LISTEN
+    tcp        0      0 :::8080                 :::*                    LISTEN
+    ```
+
+    ...notice the `:::8080`?
