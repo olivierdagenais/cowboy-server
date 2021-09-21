@@ -2,6 +2,8 @@
 
 Configuration files for a RancherOS deployment
 
+> **NOTE**: I ended up abandoning RancherOS, so this content can be considered obsolete and abandoned.
+
 ## Installing RancherOS
 
 ### Links
